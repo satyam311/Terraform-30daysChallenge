@@ -10,12 +10,12 @@ It defines resources and data sources that Terraform can manage.
 “The bridge between Terraform and the service you want to configure.”
 
 
-Provider vs Terraform Core Version
+### Provider vs Terraform Core Version
 Terraform Core: The main Terraform binary that parses configuration and manages state
 Provider Version: Individual plugins that communicate with specific APIs (AWS, Azure, Google Cloud, etc.)
 They have independent versioning and release cycles
 
-Why Version Matters
+### Why Version Matters
 Compatibility: Ensure provider works with your Terraform version
 Stability: Pin to specific versions to avoid breaking changes
 Features: New provider versions add support for new AWS services
@@ -31,12 +31,41 @@ Use version constraints to specify acceptable provider versions:
 >= 1.2, < 2.0 - Range constraint
 
 
-Best Practices
+### Best Practices
 Always specify provider versions
 Use pessimistic constraints for stability
 Test provider upgrades in development first
 Document version requirements in your README
 Use terraform providers lock command for consistency
+
+
+### Basic Provider Configuration
+
+```
+terraform {
+  required_version = ">= 1.6.0"
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.10"
+    }
+
+    datadog = {
+      source  = "DataDog/datadog"
+      version = ">= 3.0"
+    }
+  }
+  provider "aws" {
+    region = "us-east-1"
+  }
+}
+```
+
+<img width="786" height="482" alt="Screenshot 2025-11-30 at 12 33 10 AM" src="https://github.com/user-attachments/assets/140dc193-089c-48a9-b712-5da6468b61ac" />
+
+
+
 
 
 

@@ -23,13 +23,13 @@ Bug Fixes: Updates often include important security and bug fixes
 Reproducibility: Same versions ensure consistent behavior across environments
 Version Constraints
 Use version constraints to specify acceptable provider versions:
-
+```
 = 1.2.3 - Exact version
 >= 1.2 - Greater than or equal to
 <= 1.2 - Less than or equal to
 ~> 1.2 - Pessimistic constraint (allow patch releases)
 >= 1.2, < 2.0 - Range constraint
-
+```
 
 ### Best Practices
 Always specify provider versions
@@ -63,6 +63,8 @@ terraform {
 ```
 
 <img width="786" height="482" alt="Screenshot 2025-11-30 at 12 33 10 AM" src="https://github.com/user-attachments/assets/140dc193-089c-48a9-b712-5da6468b61ac" />
+
+
 
 
 

@@ -77,7 +77,7 @@ It only displays the changes so you can review them before applying."
 6. Updates the state file
  
 
-**Other commands : **
+**Other commands :**
 
 ```
 Terraform Command	Purpose / Feature

@@ -68,3 +68,54 @@ S3 native state locking uses the **If-None-Match** HTTP header to implement atom
 - More complex IAM permissions
 - Extra cost for DynamoDB read/write operations
 - DynamoDB state locking is now **discouraged** and may be deprecated in future Terraform versions
+
+--
+
+```main.tf```
+
+```
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "6.24.0"
+    }
+  }
+  backend "s3" {
+    bucket       = "terraform-s3-backend-lock-file"
+    key          = "dev/terraform.tfstate"
+    region       = "us-east-1"
+    use_lockfile = true
+    encrypt      = true
+  }
+}
+
+provider "aws" {
+        region = "us-east-1"
+}
+
+resource "aws_s3_bucket" "test_backend" {
+  bucket = "test-remote-backend-${random_string.bucket_suffix.result}"
+
+  tags = {
+    Name        = "Test Backend Bucket"
+    Environment = "dev"
+  }
+}
+resource "aws_s3_bucket" "test_frontend" {
+  bucket = "test-remote-frontend-${random_string.bucket_suffix.result}"
+
+  tags = {
+    Name        = "Test Frontend Storge Bucket"
+    Environment = "dev"
+  }
+}
+
+resource "random_string" "bucket_suffix" {
+  length  = 8
+  special = false
+  upper   = false
+}
+```
+
+
